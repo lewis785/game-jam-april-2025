@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bu5wflmvhcwbu"]
+
+[ext_resource type="Texture2D" uid="uid://dsp42qd16veps" path="res://assets/atlas.png" id="1_yewv4"]
+[ext_resource type="Script" uid="uid://x2e74pjl26y8" path="res://scenes/characters/player.gd" id="2_76oj4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kqtwu"]
+atlas = ExtResource("1_yewv4")
+region = Rect2(0, 0, 16, 16)
+
+[node name="Player" type="Node2D"]
+script = ExtResource("2_76oj4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_kqtwu")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(0, 16)
