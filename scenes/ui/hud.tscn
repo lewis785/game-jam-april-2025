@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=3 uid="uid://uj32k7waswej"]
+
+[ext_resource type="Script" uid="uid://7hvjhhd7dug2" path="res://scenes/ui/hud.gd" id="1_0mwgc"]
+
+[node name="Hud" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0mwgc")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ItemTexture" type="TextureRect" parent="ColorRect"]
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+
+[node name="ItemLabel" type="Label" parent="ColorRect/ItemTexture"]
+layout_mode = 0
+offset_top = 32.0
+offset_right = 32.0
+offset_bottom = 55.0
