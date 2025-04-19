@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Npc" load_steps=5 format=3 uid="uid://bbntdshqn7dsy"]
+
+[ext_resource type="Resource" uid="uid://bmd1xstin2o1k" path="res://resources/items/key.tres" id="1_m343o"]
+[ext_resource type="Script" uid="uid://cum11kkxyvaap" path="res://resources/npc/npc.gd" id="1_tmxaj"]
+[ext_resource type="Texture2D" uid="uid://dr4gjg00xmmk7" path="res://assets/dungeon_tilemap.png" id="3_20jqy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_02t5a"]
+atlas = ExtResource("3_20jqy")
+region = Rect2(51, 136, 16, 16)
+
+[resource]
+script = ExtResource("1_tmxaj")
+texture = SubResource("AtlasTexture_02t5a")
+item = ExtResource("1_m343o")
+metadata/_custom_type_script = "uid://cum11kkxyvaap"
