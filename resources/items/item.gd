@@ -5,3 +5,4 @@ extends Resource
 @export var texture: Texture2D
 @export var placeable: bool = false
 @export var block_line_of_sight: bool = false
+@export var walkable: bool = false
