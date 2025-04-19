@@ -20,9 +20,8 @@ func remove_item() -> void:
 	visible = false
 	item = null
 
-func _on_player_item_picked_up(item: Item) -> void:
-	change_item(item)
-
-
 func _on_player_item_used() -> void:
 	remove_item()
+
+func _on_player_item_received(gifter: Gifter, item: Item) -> void:
+	change_item(item)
