@@ -1,21 +1,35 @@
-[gd_scene load_steps=4 format=3 uid="uid://bu5wflmvhcwbu"]
+[gd_scene load_steps=5 format=3 uid="uid://bu5wflmvhcwbu"]
 
-[ext_resource type="Texture2D" uid="uid://dsp42qd16veps" path="res://assets/atlas.png" id="1_yewv4"]
 [ext_resource type="Script" uid="uid://x2e74pjl26y8" path="res://scenes/characters/player.gd" id="2_76oj4"]
+[ext_resource type="Texture2D" uid="uid://dr4gjg00xmmk7" path="res://assets/dungeon_tilemap.png" id="2_yewv4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kqtwu"]
-atlas = ExtResource("1_yewv4")
-region = Rect2(0, 0, 16, 16)
+atlas = ExtResource("2_yewv4")
+region = Rect2(17, 136, 16, 16)
 
-[node name="Player" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yewv4"]
+size = Vector2(16, 16)
+
+[node name="Player" type="StaticBody2D"]
+collision_layer = 2
+collision_mask = 0
 script = ExtResource("2_76oj4")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("AtlasTexture_kqtwu")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="Sprite2D"]
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
+visible = false
 target_position = Vector2(0, 16)
-collision_mask = 5
+collision_mask = 25
 collide_with_areas = true
+
+[node name="ObjectRayCast" type="RayCast2D" parent="."]
+target_position = Vector2(0, 16)
+collision_mask = 20
+collide_with_areas = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_yewv4")
