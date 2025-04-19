@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=3 uid="uid://dds2wcbuht1j0"]
+
+[ext_resource type="Script" uid="uid://qsdklbe70gpt" path="res://scenes/entities/placeable_item.gd" id="1_40jxf"]
+[ext_resource type="Resource" uid="uid://db0ga12f3x22i" path="res://resources/items/rock.tres" id="2_c6ujj"]
+[ext_resource type="Texture2D" uid="uid://dsp42qd16veps" path="res://assets/atlas.png" id="2_sbiaq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c6ujj"]
+atlas = ExtResource("2_sbiaq")
+region = Rect2(32, 32, 16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ilaq2"]
+
+[node name="PlaceableItem" type="Node2D"]
+script = ExtResource("1_40jxf")
+item = ExtResource("2_c6ujj")
+
+[node name="ItemSprite" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_c6ujj")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+scale = Vector2(0.75, 0.75)
+shape = SubResource("RectangleShape2D_ilaq2")
