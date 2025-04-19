@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://bxifhvxllx73u"]
+
+[ext_resource type="Script" uid="uid://cppq13mervwqb" path="res://scenes/characters/gifter.gd" id="1_5wl1n"]
+[ext_resource type="Texture2D" uid="uid://dsp42qd16veps" path="res://assets/atlas.png" id="1_75445"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5wl1n"]
+atlas = ExtResource("1_75445")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6nl6m"]
+size = Vector2(16, 16)
+
+[node name="Gifter" type="Node2D"]
+script = ExtResource("1_5wl1n")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_5wl1n")
+
+[node name="CollisionArea" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionArea"]
+shape = SubResource("RectangleShape2D_6nl6m")
+
+[node name="ObjectRayCast" type="RayCast2D" parent="."]
+collision_mask = 9
+collide_with_areas = true
+
+[node name="PlayerRayCast" type="RayCast2D" parent="."]
+collision_mask = 2
