@@ -58,7 +58,9 @@ use={
 2d_render/layer_3="Items"
 2d_physics/layer_1="TileMap"
 2d_physics/layer_2="Player"
-2d_physics/layer_3="Items"
+2d_physics/layer_3="Object"
+2d_physics/layer_4="Blocking Object"
+2d_physics/layer_5="Gifter"
 
 [rendering]
 
