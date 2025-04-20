@@ -90,10 +90,10 @@ func move_to_player():
 		state = STATES.GIVE_ITEM
 
 func give_item():	
-	state = STATES.MOVE_TO_HOME
 	var player: Player = get_tree().get_first_node_in_group("player")
 	player.receive_item(item, self)
 	target_position = starting_position
+	state = STATES.MOVE_TO_HOME
 	
 func move_to_home():
 	if global_position == target_position:
