@@ -11,6 +11,7 @@ var placeable_item_scene: PackedScene = preload("res://scenes/entities/placeable
 var facing: Vector2
 var last_gifter: Gifter
 var item: Item
+var tile_map: TileMapLayer
 
 enum STATES { IDLE, MOVING, WAITING }
 @export var state: STATES = STATES.IDLE
@@ -25,6 +26,8 @@ func _ready() -> void:
 	sprite_2d.texture = sprite_front
 
 func _process(_delta: float) -> void:
+	tile_map = get_tree().get_first_node_in_group("tile_map")
+	
 	if (state != STATES.IDLE):
 		return
 	
@@ -74,15 +77,20 @@ func place_item() -> void:
 	if object_ray_cast.is_colliding():
 		return
 	
-	var current_tile: Vector2 = global_position
+	var current_tile: Vector2i = tile_map.local_to_map(global_position)
 	var target_tile = Vector2i(
-		current_tile.x + (facing.x * 16),
-		current_tile.y + (facing.y * 16)
+		floori(current_tile.x + facing.x),
+		floori(current_tile.y + facing.y)
 	)
+
+	var tile_data:TileData = tile_map.get_cell_tile_data(target_tile)
+	
+	if !tile_data || tile_data.get_custom_data("placeable") == false:
+		return
 	
 	var placeable_item: PlaceableItem = placeable_item_scene.instantiate()
 	placeable_item.setup(item, last_gifter)
-	placeable_item.global_position = target_tile
+	placeable_item.global_position = tile_map.map_to_local(target_tile)
 	
 	if facing == Vector2.RIGHT || facing == Vector2.LEFT:
 		placeable_item.rotate(deg_to_rad(90))
@@ -167,4 +175,9 @@ func reset() -> void:
 	item_removed.emit(item, last_gifter)
 	item = null
 	last_gifter = null
+	tile_map = get_tree().get_first_node_in_group("tile_map")
+	facing = Vector2.DOWN
+	if sprite_2d:
+		move_animation(Vector2.UP, Vector2.DOWN)
 	_update_state(STATES.IDLE)
+	
