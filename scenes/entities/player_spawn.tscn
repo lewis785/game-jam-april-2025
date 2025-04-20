@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://c8mdw2wscjwes"]
+
+[ext_resource type="Script" uid="uid://bxkv7pv28coe8" path="res://scenes/entities/player_spawn.gd" id="1_gvjm5"]
+[ext_resource type="Texture2D" uid="uid://dr4gjg00xmmk7" path="res://assets/dungeon_tilemap.png" id="2_jjfei"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g2nes"]
+atlas = ExtResource("2_jjfei")
+region = Rect2(0, 85, 16, 16)
+
+[node name="PlayerSpawn" type="Node2D" groups=["player_spawn"]]
+script = ExtResource("1_gvjm5")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_g2nes")
