@@ -14,6 +14,6 @@ func _ready() -> void:
 	item_sprite.texture = item.texture
 	walkable = item.walkable
 
-func setup(item: Item, gifter: Gifter) -> void:
-	self.item = item
-	self.gifter = gifter
+func setup(new_item: Item, new_gifter: Gifter) -> void:
+	item = new_item
+	gifter = new_gifter

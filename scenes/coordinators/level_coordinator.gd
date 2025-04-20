@@ -47,5 +47,5 @@ func _remove_gifter_item(gifter: Gifter) -> void:
 func handle_item_placed(placed_item: PlaceableItem, gifter: Gifter):
 	_add_placed_item(gifter, placed_item)
 	
-func handle_item_received(gifter: Gifter, item: Item):
+func handle_item_received(gifter: Gifter, _item: Item):
 	_remove_gifter_item(gifter)

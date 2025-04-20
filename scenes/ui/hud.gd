@@ -23,5 +23,5 @@ func remove_item() -> void:
 func _on_player_item_used() -> void:
 	remove_item()
 
-func _on_player_item_received(gifter: Gifter, item: Item) -> void:
-	change_item(item)
+func _on_player_item_received(_gifter: Gifter, new_item: Item) -> void:
+	change_item(new_item)

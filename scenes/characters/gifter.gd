@@ -25,7 +25,7 @@ func _ready() -> void:
 	target_position = global_position
 	setup_direction()
 	
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if state != STATES.MOVE_TO_PLAYER && state != STATES.MOVE_TO_HOME:
 		return
 	
@@ -34,7 +34,7 @@ func _physics_process(delta: float) -> void:
 			
 	global_position = global_position.move_toward(target_position, 1)
 	
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	match(state):
 		STATES.IDLE:
 			check_vision()

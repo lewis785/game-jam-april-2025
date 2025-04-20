@@ -20,7 +20,7 @@ signal item_received(gifter: Gifter, item: Item)
 signal item_used()
 signal item_placed(placed_item: PlaceableItem, gifter: Gifter)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if (state != STATES.IDLE):
 		return
 	
@@ -40,7 +40,7 @@ func _update_state(new_state: STATES) -> void:
 		return
 	state = new_state
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if state == STATES.IDLE:
 		return
 	
@@ -68,8 +68,8 @@ func place_item() -> void:
 	
 	var current_tile: Vector2i = tile_map.local_to_map(global_position)
 	var target_tile = Vector2i(
-		current_tile.x + facing.x,
-		current_tile.y + facing.y
+		floori(current_tile.x + facing.x),
+		floori(current_tile.y + facing.y)
 	)
 	
 	var placeable_item: PlaceableItem = placeable_item_scene.instantiate()
@@ -91,8 +91,8 @@ func move(direction: Vector2):
 	facing = direction
 	var current_tile: Vector2i = tile_map.local_to_map(global_position)
 	var target_tile = Vector2i(
-		current_tile.x + direction.x,
-		current_tile.y + direction.y
+		floori(current_tile.x + direction.x),
+		floori(current_tile.y + direction.y)
 	)
 	
 	ray_cast_2d.target_position = direction * 16
