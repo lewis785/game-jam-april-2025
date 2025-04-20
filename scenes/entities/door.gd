@@ -7,6 +7,8 @@ enum STATES { OPEN, CLOSED, LOCKED }
 
 @export var state: STATES = STATES.LOCKED
 
+signal state_changed(new_state: STATES)
+
 func unlock() -> void:
 	_update_state(STATES.OPEN)
 
@@ -29,4 +31,6 @@ func _update_state(new_state: STATES) -> void:
 		STATES.CLOSED:
 			sprite_2d.visible = true
 		
+	print("UPDATING STATE")
+	state_changed.emit(new_state)
 	state = new_state
