@@ -117,9 +117,7 @@ func can_walk_on():
 		
 	var object = object_ray_cast.get_collider()
 
-	print(object)
 	if object is not PlaceableItem:
-		print("Not object")
 		return false
 		
 	return object.walkable

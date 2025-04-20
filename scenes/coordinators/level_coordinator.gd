@@ -24,7 +24,6 @@ func change_level(level: Level):
 		player.connect("item_received", handle_item_received)
 
 func handle_goal_reached():
-	print("CHANGING LEVEL")
 	if !current_level.next_level:
 		print("run out of levels")
 		return

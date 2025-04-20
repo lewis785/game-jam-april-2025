@@ -9,7 +9,6 @@ var gifter: Gifter
 var walkable: bool
 
 func _ready() -> void:
-	print(item)
 	if item.block_line_of_sight:
 		self.collision_layer = 12
 	item_sprite.texture = item.texture

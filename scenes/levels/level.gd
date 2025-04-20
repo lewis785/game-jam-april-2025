@@ -9,5 +9,4 @@ func _ready() -> void:
 		goal.connect("state_changed", reached_goal)
 
 func reached_goal(new_state: Door.STATES):
-	prints("REACHED THE GOAL")
 	goal_reached.emit()
