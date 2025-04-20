@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=3 uid="uid://cbsjg7mmleiwm"]
+
+[ext_resource type="Theme" uid="uid://bis1xd8wmktqx" path="res://resources/themes/font.tres" id="1_r8gmh"]
+[ext_resource type="Script" uid="uid://bwo1mr5a62bwk" path="res://scenes/screens/level_select.gd" id="2_0ycd8"]
+[ext_resource type="Script" uid="uid://804x11ind14g" path="res://resources/levels/level.gd" id="3_tyivr"]
+[ext_resource type="Resource" uid="uid://diiclwh741pff" path="res://resources/levels/level_1.tres" id="4_l8kew"]
+[ext_resource type="Resource" uid="uid://dfmlnn7a7qv8u" path="res://resources/levels/level_2.tres" id="5_ra86j"]
+
+[node name="LevelSelect" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_r8gmh")
+script = ExtResource("2_0ycd8")
+levels = Array[ExtResource("3_tyivr")]([ExtResource("4_l8kew"), ExtResource("5_ra86j")])
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.7482, 0.79292, 0.86, 1)
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 20
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+horizontal_scroll_mode = 0
+
+[node name="LevelList" type="VBoxContainer" parent="PanelContainer/MarginContainer/ScrollContainer"]
+layout_mode = 2

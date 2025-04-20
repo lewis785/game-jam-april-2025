@@ -1,0 +1,125 @@
+[gd_scene load_steps=8 format=3 uid="uid://bf5ba7dlgqc8c"]
+
+[ext_resource type="Theme" uid="uid://bis1xd8wmktqx" path="res://resources/themes/font.tres" id="1_gey53"]
+[ext_resource type="Texture2D" uid="uid://riwh10eroyus" path="res://assets/screenshots/Pasted image.png" id="2_8a5hm"]
+[ext_resource type="FontFile" uid="uid://dafurgac1cak1" path="res://assets/fonts/dogicapixelbold.ttf" id="2_n424a"]
+[ext_resource type="Script" uid="uid://d01i8bp7lnvwv" path="res://scenes/screens/start_menu.gd" id="2_rg8ql"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8a5hm"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.882353, 0.882353, 0.882353, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0.0807833, 0.0807833, 0.0807833, 0.6)
+shadow_size = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hl26t"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0.0807833, 0.0807833, 0.0807833, 0.6)
+shadow_size = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rg8ql"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.882353, 0.882353, 0.882353, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0.0807833, 0.0807833, 0.0807833, 0.6)
+shadow_size = 4
+
+[node name="StartMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_gey53")
+script = ExtResource("2_rg8ql")
+
+[node name="ColorRect" type="TextureRect" parent="."]
+modulate = Color(0.54099, 0.54099, 0.54099, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_8a5hm")
+expand_mode = 4
+
+[node name="TextEdit" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -90.0
+offset_top = 19.0
+offset_right = 90.0
+offset_bottom = 59.0
+grow_horizontal = 2
+theme = ExtResource("1_gey53")
+theme_override_colors/font_color = Color(0.884521, 0.449187, 0.249265, 1)
+theme_override_colors/font_shadow_color = Color(0.212305, 0.212305, 0.212305, 1)
+theme_override_fonts/font = ExtResource("2_n424a")
+theme_override_font_sizes/font_size = 16
+text = "I Think You
+Dropped This"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -79.0
+offset_top = -7.0
+offset_right = 79.0
+offset_bottom = 41.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_gey53")
+theme_override_constants/separation = 12
+
+[node name="LevelSelect" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_gey53")
+theme_override_colors/font_hover_color = Color(0.205117, 0.205117, 0.205117, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/focus = SubResource("StyleBoxFlat_8a5hm")
+theme_override_styles/hover = SubResource("StyleBoxFlat_hl26t")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_8a5hm")
+theme_override_styles/normal = SubResource("StyleBoxFlat_8a5hm")
+text = "Select Level"
+
+[node name="Instruction" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(0.205117, 0.205117, 0.205117, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/focus = SubResource("StyleBoxFlat_8a5hm")
+theme_override_styles/hover = SubResource("StyleBoxFlat_hl26t")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_8a5hm")
+theme_override_styles/normal = SubResource("StyleBoxFlat_rg8ql")
+text = "How To Play"
+
+[connection signal="pressed" from="VBoxContainer/LevelSelect" to="." method="_on_level_select_pressed"]
+[connection signal="pressed" from="VBoxContainer/Instruction" to="." method="_on_instruction_pressed"]
