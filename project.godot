@@ -15,10 +15,14 @@ run/main_scene="uid://pf1ftq1snolq"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GameManager="*res://global/game_manager.gd"
+
 [display]
 
-window/size/viewport_width=160
-window/size/viewport_height=160
+window/size/viewport_width=180
+window/size/viewport_height=180
 window/size/window_width_override=640
 window/size/window_height_override=640
 window/stretch/mode="canvas_items"
