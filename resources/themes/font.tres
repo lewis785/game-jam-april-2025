@@ -1,0 +1,6 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://bis1xd8wmktqx"]
+
+[ext_resource type="FontFile" uid="uid://l6nelyl6vpnx" path="res://assets/fonts/dogicapixel.ttf" id="1_8g7fe"]
+
+[resource]
+default_font = ExtResource("1_8g7fe")
