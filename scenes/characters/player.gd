@@ -99,8 +99,9 @@ func place_item() -> void:
 		
 	item_placed.emit(placeable_item, last_gifter)
 	item = null
-	last_gifter = null
 	item_removed.emit(item, last_gifter)
+	await get_tree().create_timer(0.5).timeout
+	last_gifter = null
 
 func move_animation(existing_direction: Vector2, new_direction: Vector2) -> void:
 	if existing_direction == new_direction:
