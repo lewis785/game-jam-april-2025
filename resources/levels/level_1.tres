@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Level" load_steps=4 format=3 uid="uid://diiclwh741pff"]
+
+[ext_resource type="Script" uid="uid://804x11ind14g" path="res://resources/levels/level.gd" id="1_hndnq"]
+[ext_resource type="PackedScene" uid="uid://x3lmjt2bpimc" path="res://scenes/levels/level_1.tscn" id="1_sfdh2"]
+[ext_resource type="Resource" uid="uid://dfmlnn7a7qv8u" path="res://resources/levels/level_2.tres" id="2_yc005"]
+
+[resource]
+script = ExtResource("1_hndnq")
+level_scene = ExtResource("1_sfdh2")
+level_name = "Simple Start"
+next_level = ExtResource("2_yc005")
+metadata/_custom_type_script = "uid://804x11ind14g"
