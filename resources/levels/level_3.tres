@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Level" load_steps=3 format=3 uid="uid://gtad63kkcf5p"]
+
+[ext_resource type="Script" uid="uid://804x11ind14g" path="res://resources/levels/level.gd" id="1_jer2e"]
+[ext_resource type="PackedScene" uid="uid://cvjd0kr2o2sjr" path="res://scenes/levels/level_3.tscn" id="1_onuep"]
+
+[resource]
+script = ExtResource("1_jer2e")
+level_scene = ExtResource("1_onuep")
+level_name = "Ramped Up"
+metadata/_custom_type_script = "uid://804x11ind14g"
