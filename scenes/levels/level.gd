@@ -6,7 +6,7 @@ signal goal_reached()
 
 func _ready() -> void:
 	if goal:
-		goal.connect("state_changed", reached_goal)
+		goal.state_changed.connect(reached_goal)
 
 func reached_goal(_new_state: Door.STATES):
 	goal_reached.emit()

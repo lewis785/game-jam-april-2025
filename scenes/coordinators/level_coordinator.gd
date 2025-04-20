@@ -14,7 +14,7 @@ func _ready() -> void:
 		player.item_placed.connect(handle_item_placed)
 		player.item_received.connect(handle_item_received)
 	if game:
-		game.connect("goal_reached", handle_goal_reached)
+		game.goal_reached.connect(handle_goal_reached)
 
 func change_level(level: Level):
 	player.reset()
