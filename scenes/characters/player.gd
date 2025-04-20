@@ -88,7 +88,6 @@ func place_item() -> void:
 	
 	
 func move(direction: Vector2):
-	
 	facing = direction
 	var current_tile: Vector2i = tile_map.local_to_map(global_position)
 	var target_tile = Vector2i(
@@ -99,7 +98,7 @@ func move(direction: Vector2):
 	ray_cast_2d.target_position = direction * 16
 	object_ray_cast.target_position = direction * 16
 	ray_cast_2d.force_raycast_update()
-	ray_cast_2d.force_raycast_update()
+	object_ray_cast.force_raycast_update()
 	
 	open_door()
 	if !can_walk_on():
