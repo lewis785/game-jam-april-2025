@@ -5,11 +5,11 @@ var placed_items: Dictionary = {}
 @export var hud: Hud
 @export var player: Player
 @export var game: Game
-@export var current_level: Level
+#@export var current_level: Level
 
 func _ready() -> void:
-	if current_level:
-		change_level(current_level)
+	change_level(GameManager.current_level)
+
 	if player:
 		player.item_placed.connect(handle_item_placed)
 		player.item_received.connect(handle_item_received)
@@ -17,17 +17,17 @@ func _ready() -> void:
 		game.goal_reached.connect(handle_goal_reached)
 
 func change_level(level: Level):
-	player.reset()
-	hud.remove_item()
 	game.change_level(level)
+	hud.remove_item()
+	player.reset()
 
 func handle_goal_reached():
-	if !current_level.next_level:
+	if !GameManager.current_level.next_level:
 		print("run out of levels")
 		return
 	
-	current_level = current_level.next_level
-	change_level(current_level)
+	GameManager.current_level = GameManager.current_level.next_level
+	change_level(GameManager.current_level)
 
 func _add_placed_item(gifter: Gifter, placeable_item: PlaceableItem): 
 	placed_items.set(str(gifter.get_instance_id()), placeable_item)
