@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Game Jam April 2024"
-run/main_scene="uid://dp1pnt0ap3d47"
+run/main_scene="uid://pf1ftq1snolq"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
