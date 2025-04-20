@@ -14,22 +14,31 @@ var item: Item
 
 enum STATES { IDLE, MOVING, WAITING }
 @export var state: STATES = STATES.IDLE
+@export var sprite_front: Texture2D
+@export var sprite_back: Texture2D
 
 signal item_received(item: Item, gifter: Gifter)
 signal item_removed(item: Item, gifter: Gifter)
 signal item_placed(placed_item: PlaceableItem, gifter: Gifter)
+
+func _ready() -> void:
+	sprite_2d.texture = sprite_front
 
 func _process(_delta: float) -> void:
 	if (state != STATES.IDLE):
 		return
 	
 	if Input.is_action_pressed("up"):
+		move_animation(facing, Vector2.UP)
 		move(Vector2.UP)
 	elif Input.is_action_pressed("down"):
+		move_animation(facing, Vector2.DOWN)
 		move(Vector2.DOWN)
 	elif Input.is_action_pressed("left"):
+		move_animation(facing, Vector2.LEFT)
 		move(Vector2.LEFT)
 	elif Input.is_action_pressed("right"):
+		move_animation(facing, Vector2.RIGHT)
 		move(Vector2.RIGHT)
 	elif Input.is_action_pressed("use"):
 		place_item()
@@ -84,7 +93,22 @@ func place_item() -> void:
 	item = null
 	last_gifter = null
 	item_removed.emit(item, last_gifter)
+
+func move_animation(existing_direction: Vector2, new_direction: Vector2) -> void:
+	if existing_direction == new_direction:
+		return
 	
+	if new_direction == Vector2.RIGHT || new_direction == Vector2.DOWN:
+		sprite_2d.texture = sprite_front
+		sprite_2d.flip_h = false
+	
+	if new_direction == Vector2.LEFT:
+		sprite_2d.texture = sprite_front
+		sprite_2d.flip_h = true
+	
+	if new_direction == Vector2.UP:
+		sprite_2d.texture = sprite_back
+		sprite_2d.flip_h = false
 	
 func move(direction: Vector2):
 	facing = direction
