@@ -1,12 +1,11 @@
 class_name Player
 extends StaticBody2D
 
-@export var tile_map: TileMapLayer
+#@export var tile_map: TileMapLayer
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var ray_cast_2d: RayCast2D = $RayCast2D
 @onready var object_ray_cast: RayCast2D = $ObjectRayCast
 
-var rock: Item = preload("res://resources/items/rock.tres")
 var placeable_item_scene: PackedScene = preload("res://scenes/entities/placeable_item.tscn")
 
 var facing: Vector2
@@ -16,8 +15,8 @@ var item: Item
 enum STATES { IDLE, MOVING, WAITING }
 @export var state: STATES = STATES.IDLE
 
-signal item_received(gifter: Gifter, item: Item)
-signal item_used()
+signal item_received(item: Item, gifter: Gifter)
+signal item_removed(item: Item, gifter: Gifter)
 signal item_placed(placed_item: PlaceableItem, gifter: Gifter)
 
 func _process(_delta: float) -> void:
@@ -56,7 +55,7 @@ func start_interaction():
 func receive_item(new_item: Item, gifter: Gifter) -> void:
 	item = new_item
 	last_gifter = gifter
-	item_received.emit(gifter, item)
+	item_received.emit(item, gifter)
 	_update_state(STATES.IDLE)
 	
 func place_item() -> void:
@@ -66,33 +65,33 @@ func place_item() -> void:
 	if object_ray_cast.is_colliding():
 		return
 	
-	var current_tile: Vector2i = tile_map.local_to_map(global_position)
+	var current_tile: Vector2 = global_position
 	var target_tile = Vector2i(
-		floori(current_tile.x + facing.x),
-		floori(current_tile.y + facing.y)
+		current_tile.x + (facing.x * 16),
+		current_tile.y + (facing.y * 16)
 	)
 	
 	var placeable_item: PlaceableItem = placeable_item_scene.instantiate()
 	placeable_item.setup(item, last_gifter)
-	placeable_item.global_position = tile_map.map_to_local(target_tile)
+	placeable_item.global_position = target_tile
 	
 	if facing == Vector2.RIGHT || facing == Vector2.LEFT:
 		placeable_item.rotate(deg_to_rad(90))
 		
-	get_parent().add_child(placeable_item)
+	get_tree().get_first_node_in_group("game_world").add_child(placeable_item)
 		
 	item_placed.emit(placeable_item, last_gifter)
 	item = null
 	last_gifter = null
-	item_used.emit()
+	item_removed.emit(item, last_gifter)
 	
 	
 func move(direction: Vector2):
 	facing = direction
-	var current_tile: Vector2i = tile_map.local_to_map(global_position)
-	var target_tile = Vector2i(
-		floori(current_tile.x + direction.x),
-		floori(current_tile.y + direction.y)
+	var current_tile: Vector2 = global_position
+	var target_tile = Vector2(
+		global_position.x + (direction.x * 16),
+		global_position.y + (direction.y * 16)
 	)
 	
 	ray_cast_2d.target_position = direction * 16
@@ -105,8 +104,8 @@ func move(direction: Vector2):
 		return
 	
 	_update_state(STATES.MOVING)
-	global_position = tile_map.map_to_local(target_tile)
-	sprite_2d.global_position = tile_map.map_to_local(current_tile)
+	global_position = target_tile
+	sprite_2d.global_position = current_tile
 
 func can_walk_on():
 	if !ray_cast_2d.is_colliding():
@@ -136,7 +135,12 @@ func open_door():
 		return
 		
 	object.unlock()
+	item_removed.emit(item, last_gifter)
 	item = null
 	last_gifter = null
-	item_used.emit()
 	
+func reset() -> void:
+	item_removed.emit(item, last_gifter)
+	item = null
+	last_gifter = null
+	_update_state(STATES.IDLE)

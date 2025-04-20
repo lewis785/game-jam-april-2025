@@ -2,26 +2,24 @@ class_name LevelCoordinator
 extends Node2D
 
 var placed_items: Dictionary = {}
-#@export var level_node: Node
-@export var current_level: Level
+@export var hud: Hud
+@export var player: Player
 @export var game: Game
+@export var current_level: Level
 
 func _ready() -> void:
-	var player = get_tree().get_first_node_in_group("player")
-	if player:
-		player.connect("item_placed", handle_item_placed)
-		player.connect("item_received", handle_item_received)
 	if current_level:
 		change_level(current_level)
+	if player:
+		player.item_placed.connect(handle_item_placed)
+		player.item_received.connect(handle_item_received)
 	if game:
 		game.connect("goal_reached", handle_goal_reached)
 
 func change_level(level: Level):
+	player.reset()
+	hud.remove_item()
 	game.change_level(level)
-	var player = get_tree().get_first_node_in_group("player")
-	if player:
-		player.connect("item_placed", handle_item_placed)
-		player.connect("item_received", handle_item_received)
 
 func handle_goal_reached():
 	if !current_level.next_level:
@@ -46,6 +44,10 @@ func _remove_gifter_item(gifter: Gifter) -> void:
 	
 func handle_item_placed(placed_item: PlaceableItem, gifter: Gifter):
 	_add_placed_item(gifter, placed_item)
+	if hud:
+		hud.remove_item()
 	
-func handle_item_received(gifter: Gifter, _item: Item):
+func handle_item_received(item: Item, gifter: Gifter ):
 	_remove_gifter_item(gifter)
+	if hud:
+		hud.change_item(item)
